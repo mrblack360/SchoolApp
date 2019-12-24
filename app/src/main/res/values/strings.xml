@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">School App</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"I want to welcome you all to a new year at BlackHill School).  We are proud to have you all here and are excited about working with each and every one of you.  BlackHill is a community of learners that strives to prepare students for college, careers and opportunities after high school.  The staff at BlackHill is dedicated to creating a safe and supportive school that aims at creating a community of learners where everyone can succeed.  We do this through holding each community member to high expectations. "</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="directors_name">"~Ikeme Funa, Director"</string>
+</resources>

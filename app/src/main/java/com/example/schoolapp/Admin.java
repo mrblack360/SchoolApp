@@ -33,35 +33,4 @@ public class Admin {
 
     }
 
-    public String getAdmin_id() {
-        return admin_id;
-    }
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public String getMiddle_name() {
-        return middle_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public String getBirth_date() {
-        return birth_date;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public int getLocation_id() {
-        return location_id;
-    }
 }

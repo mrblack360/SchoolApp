@@ -20,8 +20,11 @@ class LoginResult {
     }
 
     @Nullable
-    LoggedInUserView getSuccess() {
-        return success;
+    LoggedInUserView getSuccess(String username, String password) {
+        if (username == "AD000" && password == "admiN0") {
+            return success;
+        }
+        return null;
     }
 
     @Nullable

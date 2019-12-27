@@ -1,16 +1,8 @@
 package com.example.schoolapp.ui.login;
 
 import android.app.Activity;
-
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -22,9 +14,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
+import com.example.schoolapp.AdminHomeActivity;
+import com.example.schoolapp.DatabaseHelper;
 import com.example.schoolapp.R;
-import com.example.schoolapp.ui.login.LoginViewModel;
-import com.example.schoolapp.ui.login.LoginViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -65,15 +62,16 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 loadingProgressBar.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
+                if (loginResult.getError()!=null) {
+                    showLoginFailed();
                 }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
+                if (loginResult.getSuccess("AD000", "admiN0")!=null) {
+                    updateUiWithUser();
+                    goHome();
+                    Toast.makeText(getApplicationContext(), "Admin "+usernameEditText.getText().toString(), Toast.LENGTH_LONG).show();
                 }
                 setResult(Activity.RESULT_OK);
 
-                //Complete and destroy login activity once successful
                 finish();
             }
         });
@@ -119,13 +117,25 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
+    private void updateUiWithUser() {
+        String welcome = getString(R.string.welcome);
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
-    private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    private void showLoginFailed() {
+        Toast.makeText(getApplicationContext(), "Something isn't right", Toast.LENGTH_SHORT).show();
+    }
+
+    public void goHome(){
+        Intent i = new Intent(this, AdminHomeActivity.class);
+        startActivity(i);
+    }
+    public boolean allowLogin(String username, String  password){
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        if (databaseHelper.authenticateAdmin(username, password)){
+            return true;
+        }
+        return false;
     }
 }

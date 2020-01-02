@@ -2,7 +2,6 @@ package com.example.schoolapp;
 
 public class Admin {
     public String admin_id;
-    public String password;
     public String first_name;
     public String middle_name;
     public String last_name;
@@ -11,12 +10,8 @@ public class Admin {
     public String email;
     public int location_id;
 
-    public void Admin(){
-
-    }
-    public void Admin(
+    public Admin(
             String admin_id,
-            String password,
             String first_name,
             String middle_name,
             String last_name,
@@ -25,7 +20,6 @@ public class Admin {
             String email,
             int location_id){
         this.admin_id=admin_id;
-        this.password=password;
         this.first_name=first_name;
         this.middle_name=middle_name;
         this.last_name=last_name;

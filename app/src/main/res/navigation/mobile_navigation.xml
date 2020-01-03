@@ -16,5 +16,10 @@
         android:name="com.example.schoolapp.ui.tools.ToolsFragment"
         android:label="@string/menu_tools"
         tools:layout="@layout/fragment_tools" />
+    <fragment
+        android:id="@+id/nav_add_student"
+        android:name="com.example.schoolapp.ui.addStudent.AddStudent"
+        android:label="@string/add_student"
+        tools:layout="@layout/fragment_add_student" />
 
 </navigation>

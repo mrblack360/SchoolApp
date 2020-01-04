@@ -15,10 +15,13 @@
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
+            android:id="@+id/student_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -32,7 +35,8 @@
                 android:layout_marginEnd="24dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="@string/first_name" />
+                android:text="@string/first_name"
+                tools:text="@string/last_name" />
 
             <EditText
                 android:id="@+id/student_middle_name"
@@ -58,6 +62,131 @@
                 android:inputType="textPersonName"
                 android:text="@string/last_name"
                 tools:text="@string/last_name" />
+
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="@string/gender"
+                android:textColor="@color/colorPrimary"
+                android:textColorLink="#070707"
+                android:textSize="18sp"
+                tools:text="@string/gender" />
+
+            <RadioGroup
+                android:id="@+id/gender_selection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="24dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <RadioButton
+                    android:id="@+id/gender_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:text="@string/gender_male" />
+
+                <RadioButton
+                    android:id="@+id/gender_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="53dp"
+                    android:text="@string/gender_female" />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/birth_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:ems="10"
+                android:inputType="date"
+                android:text="@string/birth_date"
+                tools:text="@string/birth_date" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:text="@string/email"
+                tools:text="@string/email" />
+
+            <EditText
+                android:id="@+id/phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:ems="10"
+                android:inputType="phone"
+                android:text="@string/phone_no"
+                tools:text="@string/phone_no" />
+
+            <TextView
+                android:id="@+id/place_of_residence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="@string/place_of_residence"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/region"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="24dp"
+                android:contentDescription="@string/region"
+                android:duplicateParentState="false"
+                android:entries="@array/region"
+                android:spinnerMode="dropdown" />
+
+            <Spinner
+                android:id="@+id/district"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="24dp"
+                android:entries="@array/district" />
+
+            <Spinner
+                android:id="@+id/ward"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="24dp"
+                android:entries="@array/ward" />
+
+            <Button
+                android:id="@+id/add_student_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:background="@color/colorPrimary"
+                android:text="@string/add_student"
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
     </ScrollView>

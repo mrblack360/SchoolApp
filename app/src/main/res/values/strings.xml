@@ -34,4 +34,19 @@
     <string name="ward">Ward</string>
     <string name="assign_password">"Assign Password"</string>
     <string name="confirm_password">"Confirm Password"</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="place_of_residence">"Place of Residence"</string>
+    <string-array name="region">
+        <item>Select Region</item>
+        <item>Arusha</item>
+        <item>Dar es Salaam</item>
+        <item>Dodoma</item>
+    </string-array>
+    <string-array name="district">
+        <item>Select District</item>
+    </string-array>
+    <string-array name="ward">
+        <item>Select Ward</item>
+    </string-array>
 </resources>

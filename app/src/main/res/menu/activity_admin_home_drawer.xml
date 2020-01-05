@@ -9,12 +9,24 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
     </group>
+
     <item android:title="Student">
         <menu>
         <item
             android:id="@+id/nav_add_student"
             android:icon="@drawable/ic_person_add_24px"
             android:title="@string/add_student" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/staff"
+        android:title="@string/staff">
+        <menu>
+            <item
+                android:id="@+id/nav_add_staff"
+                android:icon="@drawable/ic_person_add_24px"
+                android:title="@string/add_staff" />
         </menu>
     </item>
 

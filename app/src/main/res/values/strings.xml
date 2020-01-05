@@ -23,6 +23,14 @@
     <string name="add_staff">Add Staff</string>
     <string name="staff">Staff</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+    <string name="admin_welcome_note">What Can You Do?</string>
+    <string name="admin_doos">"
+        1. Register Student\n
+        2. Register Staff\n
+        3. Register other administrators\n
+        4. Register Courses\n
+        5. Editing the added items</string>
 
     <string name="first_name">"First Name"</string>
     <string name="middle_name">"Middle Name"</string>

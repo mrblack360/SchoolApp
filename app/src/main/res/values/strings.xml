@@ -20,6 +20,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_tools">App Settings</string>
     <string name="add_student">Add Student</string>
+    <string name="edit_student">Edit Student</string>
     <string name="staff">Staff</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -60,4 +61,5 @@
     </string-array>
 
     <string name="add_staff">Add Staff</string>
+    <string name="edit_staff">Edit Staff</string>
 </resources>

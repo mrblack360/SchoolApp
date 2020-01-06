@@ -16,6 +16,11 @@
             android:id="@+id/nav_add_student"
             android:icon="@drawable/ic_person_add_24px"
             android:title="@string/add_student" />
+
+        <item
+            android:id="@+id/nav_edit_student"
+            android:icon="@drawable/ic_edit"
+            android:title="@string/edit_student" />
         </menu>
     </item>
 
@@ -27,6 +32,10 @@
                 android:id="@+id/nav_add_staff"
                 android:icon="@drawable/ic_person_add_24px"
                 android:title="@string/add_staff" />
+            <item
+                android:id="@+id/nav_edit_staff"
+                android:icon="@drawable/ic_edit"
+                android:title="@string/edit_staff" />
         </menu>
     </item>
 

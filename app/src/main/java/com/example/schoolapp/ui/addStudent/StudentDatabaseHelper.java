@@ -2,6 +2,7 @@ package com.example.schoolapp.ui.addStudent;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -33,5 +34,13 @@ public class StudentDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase studentDB = getWritableDatabase();
         studentDB.insert("student", null, values);
         studentDB.close();
+    }
+    public boolean studentExist(String student_id){
+        SQLiteDatabase studentDB = this.getReadableDatabase();
+        Cursor cursor = studentDB.query("student", new String[]{"student_id"}, "student_id", new String[]{student_id}, null,null,null);
+        if (cursor != null && cursor.moveToFirst()&& cursor.getCount()>0) {
+            return true;
+        }
+        return false;
     }
 }

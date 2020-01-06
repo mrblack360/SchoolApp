@@ -1,6 +1,7 @@
 package com.example.schoolapp.ui.addStudent;
 
 public class Student {
+    private String student_id;
     private String first_name;
     private String middle_nam;
     private String last_name;

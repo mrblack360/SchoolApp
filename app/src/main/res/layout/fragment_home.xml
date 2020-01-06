@@ -25,6 +25,7 @@
                 android:layout_marginRight="8dp"
                 android:text="@string/admin_welcome_note"
                 android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +39,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
-                android:text="@string/admin_doos" />
+                android:text="@string/admin_doos"
+                android:textColor="@color/colorPrimary" />
         </LinearLayout>
     </ScrollView>
 

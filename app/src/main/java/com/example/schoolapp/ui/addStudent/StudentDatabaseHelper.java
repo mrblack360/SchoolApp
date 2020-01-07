@@ -13,7 +13,7 @@ public class StudentDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void onCreate(SQLiteDatabase studentDB){
-        studentDB.execSQL("create table student(student_id varchar(6) primary key, first_name varchar(15), middle_name varchar(15), last_name varchar(15), gender varchar(6), date_of_birth datetime, email varchar(30), phone_number int(10), location_id int(8))");
+        studentDB.execSQL("create table student(student_id text(6) primary key, first_name text(15), middle_name text(15), last_name text(15), gender text(6), date_of_birth datetime, email text(30), phone_number int(10), location_id int(8))");
     }
 
     public void onUpgrade(SQLiteDatabase studentDB, int oldVersion, int newVersion){

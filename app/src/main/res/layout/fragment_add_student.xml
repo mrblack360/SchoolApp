@@ -27,7 +27,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/staff_first_name"
+                android:id="@+id/student_first_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -39,7 +39,7 @@
                 tools:text="@string/last_name" />
 
             <EditText
-                android:id="@+id/staff_middle_name"
+                android:id="@+id/student_middle_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -51,7 +51,7 @@
                 tools:text="@string/middle_name" />
 
             <EditText
-                android:id="@+id/staff_last_name"
+                android:id="@+id/student_last_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -178,7 +178,7 @@
                 android:entries="@array/ward" />
 
             <Button
-                android:id="@+id/add_staff_button"
+                android:id="@+id/add_student_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"

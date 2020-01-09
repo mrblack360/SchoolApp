@@ -6,6 +6,9 @@
   <action id="InsertLiveTemplate">
     <keyboard-shortcut first-keystroke="shift l" />
   </action>
+  <action id="SplitVertically">
+    <keyboard-shortcut first-keystroke="shift ctrl s" />
+  </action>
   <action id="UpdateRunningApplication" />
   <action id="android.deploy.ApplyChanges">
     <keyboard-shortcut first-keystroke="ctrl f10" />

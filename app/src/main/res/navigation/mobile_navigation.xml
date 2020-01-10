@@ -26,6 +26,6 @@
     <fragment
         android:id="@+id/nav_add_staff"
         android:name="com.example.schoolapp.ui.addStaff.addStaff"
-        android:label="@string/add_student"
+        android:label="@string/add_staff"
         tools:layout="@layout/fragment_add_student" />
 </navigation>

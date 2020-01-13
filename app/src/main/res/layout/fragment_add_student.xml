@@ -114,6 +114,8 @@
                 android:ems="10"
                 android:inputType="date"
                 android:text="@string/birth_date"
+                android:hint="@string/birth_date"
+                android:clickable="true"
                 tools:text="@string/birth_date" />
 
             <EditText

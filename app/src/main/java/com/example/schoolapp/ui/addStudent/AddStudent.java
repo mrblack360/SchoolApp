@@ -30,7 +30,7 @@ public class AddStudent extends Fragment{
          EditText middle_name = root.findViewById(R.id.student_middle_name);
          EditText last_name = root.findViewById(R.id.student_last_name);
          RadioGroup gender = root.findViewById(R.id.gender_selection);
-         EditText date_of_birth = root.findViewById(R.id.birth_date);
+         final EditText date_of_birth = root.findViewById(R.id.birth_date);
          EditText email = root.findViewById(R.id.email);
          EditText phone_number = root.findViewById(R.id.phone_number);
          Spinner region = root.findViewById(R.id.region);
@@ -46,7 +46,10 @@ public class AddStudent extends Fragment{
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
+                String myFormat = "MM/dd/yyyy"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                date_of_birth.setText(sdf.format(myCalendar.getTime()));
             }
 
         };
@@ -62,10 +65,5 @@ public class AddStudent extends Fragment{
 
         return root;
     }
-    private void updateLabel() {
-        String myFormat = "MM/dd/yyyy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-//        date_of_birth.setText(sdf.format(myCalendar.getTime()));
-    }
 }

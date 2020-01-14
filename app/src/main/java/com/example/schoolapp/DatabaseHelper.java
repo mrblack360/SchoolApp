@@ -6,11 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.schoolapp.ui.addStudent.Student;
 
+
+
 public class DatabaseHelper extends SQLiteOpenHelper {
+    Location location = new Location();
     public DatabaseHelper (Context context){
         super(context, "School.db", null, 1);
     }
@@ -19,7 +21,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create TABLE admin(admin_id TEXT PRIMARY KEY, first_name TEXT, middle_name VARCHAR(15), last_name VARCHAR(15), gender VARCHAR(6), birth_date datetime, email VARCHAR(30), location_id int(8))");
         db.execSQL("CREATE TABLE user(user_name VARCHAR(10) PRIMARY KEY, password VARCHAR(10), user_role VARCHAR(10))");
         db.execSQL("CREATE TABLE student(student_id text(6) PRIMARY KEY, first_name TEXT, middle_name text(15), last_name text(15), gender VARCHAR(6), date_of_birth datetime, email VARCHAR(30), phone_number int(10), location_id int(8))");
-        //createDefaultUser();
+        db.execSQL(location.createRegionTable);
+        db.execSQL(location.createDistrictTable);
+        db.execSQL(location.createWardTable);
+        db.execSQL(location.insertRegions);
+//        db.execSQL(location.insertDistricts);
+//        db.execSQL(location.insertWards);
     }
 
     public  void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
@@ -39,35 +46,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         userDB.close();
     }
 
-//    public void addAdmin(Admin admin){
-//        ContentValues values = new ContentValues();
-//        values.put("admin_id", admin.admin_id);
-//        values.put("first_name", admin.first_name);
-//        values.put("middle_name", admin.middle_name);
-//        values.put("last_name", admin.last_name);
-//        values.put("gender", admin.gender);
-//        values.put("birth_date", admin.birth_date);
-//        values.put("location_id", admin.location_id);
-//        SQLiteDatabase db = getWritableDatabase();
-//        db.insert("staff", null, values);
-//        db.close();
-//    }
-//
-//    public void addStudent(Student student){
-//        ContentValues values = new ContentValues();
-//        values.put("student_id", student.student_id);
-//        values.put("first_name", student.first_name);
-//        values.put("middle_name", student.middle_name);
-//        values.put("last_name", student.last_name);
-//        values.put("gender", student.gender);
-//        values.put("date_of_birth", student.date_of_birth);
-//        values.put("email", student.email);
-//        values.put("phone_no", student.phone_number);
-//        values.put("location_id", student.location_id);
-//        SQLiteDatabase studentDB = getWritableDatabase();
-//        studentDB.insert("student", null, values);
-//        studentDB.close();
-//    }
+    public void addAdmin(Admin admin){
+        ContentValues values = new ContentValues();
+        values.put("admin_id", admin.admin_id);
+        values.put("first_name", admin.first_name);
+        values.put("middle_name", admin.middle_name);
+        values.put("last_name", admin.last_name);
+        values.put("gender", admin.gender);
+        values.put("birth_date", admin.birth_date);
+        values.put("location_id", admin.location_id);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert("staff", null, values);
+        db.close();
+    }
+
+    public void addStudent(Student student){
+        ContentValues values = new ContentValues();
+        values.put("student_id", student.student_id);
+        values.put("first_name", student.first_name);
+        values.put("middle_name", student.middle_name);
+        values.put("last_name", student.last_name);
+        values.put("gender", student.gender);
+        values.put("date_of_birth", student.date_of_birth);
+        values.put("email", student.email);
+        values.put("phone_no", student.phone_number);
+        values.put("location_id", student.location_id);
+        SQLiteDatabase studentDB = getWritableDatabase();
+        studentDB.insert("student", null, values);
+        studentDB.close();
+    }
 
     public boolean authenticateUser(String user_name, String password){
         SQLiteDatabase userDB = this.getReadableDatabase();
@@ -96,20 +103,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return false;
     }
-//    public void createDefaultUser(){
-//        User defaultUser = new User("AD001", "adminN1", "admin");
-//        if(!userExist(defaultUser)){
-//            addUser(defaultUser);
-//        }
-//    }
 
-//    public boolean studentExist(String student_id){
-//        SQLiteDatabase studentDB = this.getReadableDatabase();
-//        Cursor cursor = studentDB.query("student", new String[]{"student_id"}, "student_id", new String[]{student_id}, null,null,null);
-//        if (cursor != null && cursor.moveToFirst()&& cursor.getCount()>0) {
-//            return true;
-//        }
-//        return false;
-//    }
+    public boolean studentExist(String student_id){
+        SQLiteDatabase studentDB = this.getReadableDatabase();
+        Cursor cursor = studentDB.query("student", new String[]{"student_id"}, "student_id", new String[]{student_id}, null,null,null);
+        if (cursor != null && cursor.moveToFirst()&& cursor.getCount()>0) {
+            return true;
+        }
+        return false;
+    }
 
 }

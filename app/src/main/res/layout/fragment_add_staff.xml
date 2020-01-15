@@ -35,8 +35,8 @@
             android:layout_marginEnd="24dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/first_name"
-            tools:text="@string/last_name" />
+            android:hint="@string/first_name"
+            tools:text="@string/first_name" />
 
         <EditText
             android:id="@+id/staff_middle_name"
@@ -47,7 +47,7 @@
             android:layout_marginEnd="24dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/middle_name"
+            android:hint="@string/middle_name"
             tools:text="@string/middle_name" />
 
         <EditText
@@ -60,7 +60,6 @@
             android:ems="10"
             android:hint="@string/last_name"
             android:inputType="textPersonName"
-            android:text="@string/last_name"
             tools:text="@string/last_name" />
 
         <TextView
@@ -113,7 +112,7 @@
             android:layout_marginEnd="24dp"
             android:ems="10"
             android:inputType="date"
-            android:text="@string/birth_date"
+            android:hint="@string/birth_date"
             tools:text="@string/birth_date" />
 
         <EditText
@@ -124,7 +123,7 @@
             android:layout_marginEnd="24dp"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:text="@string/email"
+            android:hint="@string/email"
             tools:text="@string/email" />
 
         <EditText
@@ -135,7 +134,7 @@
             android:layout_marginEnd="24dp"
             android:ems="10"
             android:inputType="phone"
-            android:text="@string/phone_no"
+            android:hint="@string/phone_no"
             tools:text="@string/phone_no" />
 
         <TextView

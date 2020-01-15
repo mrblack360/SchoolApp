@@ -9,32 +9,39 @@ import android.util.Log;
 
 import com.example.schoolapp.ui.addStudent.Student;
 
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     Location location = new Location();
+    String createAdminTable = "create TABLE admin(admin_id TEXT PRIMARY KEY, first_name TEXT, middle_name VARCHAR(15), last_name VARCHAR(15), gender VARCHAR(6), birth_date datetime, email VARCHAR(30), location_id int(8))";
+    String createUserTable = "CREATE TABLE user(user_name VARCHAR(10) PRIMARY KEY, password VARCHAR(10), user_role VARCHAR(10))";
+    String createStudentTable = "CREATE TABLE student(student_id text(6) PRIMARY KEY, first_name TEXT, middle_name text(15), last_name text(15), gender VARCHAR(6), date_of_birth datetime, email VARCHAR(30), phone_number int(10), location_id int(8))";
+
     public DatabaseHelper (Context context){
         super(context, "School.db", null, 1);
     }
 
     public void onCreate(SQLiteDatabase db){
-        db.execSQL("create TABLE admin(admin_id TEXT PRIMARY KEY, first_name TEXT, middle_name VARCHAR(15), last_name VARCHAR(15), gender VARCHAR(6), birth_date datetime, email VARCHAR(30), location_id int(8))");
-        db.execSQL("CREATE TABLE user(user_name VARCHAR(10) PRIMARY KEY, password VARCHAR(10), user_role VARCHAR(10))");
-        db.execSQL("CREATE TABLE student(student_id text(6) PRIMARY KEY, first_name TEXT, middle_name text(15), last_name text(15), gender VARCHAR(6), date_of_birth datetime, email VARCHAR(30), phone_number int(10), location_id int(8))");
+        db.execSQL(createAdminTable);
+        db.execSQL(createUserTable);
+        db.execSQL(createStudentTable);
         db.execSQL(location.createRegionTable);
         db.execSQL(location.createDistrictTable);
         db.execSQL(location.createWardTable);
         db.execSQL(location.insertRegions);
-//        db.execSQL(location.insertDistricts);
-//        db.execSQL(location.insertWards);
+        db.execSQL(location.insertDistricts);
+        db.execSQL(location.insertWardsGroup1);
+        db.execSQL(location.insertWardsGroup2);
     }
 
     public  void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL("DROP TABLE IF EXISTS admin");
         db.execSQL("DROP TABLE IF EXISTS user");
         db.execSQL("DROP TABLE IF EXISTS student");
-
-
+        db.execSQL("DROP TABLE IF EXISTS districts");
+        db.execSQL("DROP TABLE IF EXISTS regions");
+        db.execSQL("DROP TABLE IF EXISTS wards");
     }
     public void addUser(User user){
         ContentValues values = new ContentValues();
@@ -88,7 +95,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
             return false;
         }else{
-            Log.d("ELSE:", "authenticateUser: ABBUJU");
+            Log.d("ELSE:", "authenticateUser: FAILED");
         }
         return false;
 
@@ -111,6 +118,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         }
         return false;
+    }
+
+//    public Cursor getRegions(){
+//        SQLiteDatabase regionDB = this.getWritableDatabase();
+//        String query = "SELECT * FROM regions";
+//        Cursor cursor = regionDB.rawQuery(query,null);
+//        regionDB.close();
+//        return cursor;
+//    }
+
+    public List<String> getRegions(){
+        List<String> regionsList = new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM regions";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                regionsList.add(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return regionsList;
     }
 
 }

@@ -14,9 +14,9 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     Location location = new Location();
-    String createAdminTable = "create TABLE admin(admin_id TEXT PRIMARY KEY, first_name TEXT, middle_name VARCHAR(15), last_name VARCHAR(15), gender VARCHAR(6), birth_date datetime, email VARCHAR(30), location_id int(8))";
+    String createAdminTable = "create TABLE admin(admin_id TEXT PRIMARY KEY, first_name TEXT, middle_name VARCHAR(15), last_name VARCHAR(15), gender VARCHAR(6), birth_date VARCHAR(13), email VARCHAR(30), location_id int(8))";
     String createUserTable = "CREATE TABLE user(user_name VARCHAR(10) PRIMARY KEY, password VARCHAR(10), user_role VARCHAR(10))";
-    String createStudentTable = "CREATE TABLE student(student_id text(6) PRIMARY KEY, first_name TEXT, middle_name text(15), last_name text(15), gender VARCHAR(6), date_of_birth datetime, email VARCHAR(30), phone_number int(10), location_id int(8))";
+    String createStudentTable = "CREATE TABLE student(student_id text(6) PRIMARY KEY, first_name TEXT, middle_name text(15), last_name text(15), gender VARCHAR(6), date_of_birth VARCHAR(13), email VARCHAR(30), phone_number int(10), location_id int(8))";
 
     public DatabaseHelper (Context context){
         super(context, "School.db", null, 1);
@@ -76,7 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("gender", student.gender);
         values.put("date_of_birth", student.date_of_birth);
         values.put("email", student.email);
-        values.put("phone_no", student.phone_number);
+        values.put("phone_number", student.phone_number);
         values.put("location_id", student.location_id);
         SQLiteDatabase studentDB = getWritableDatabase();
         studentDB.insert("student", null, values);
@@ -171,5 +171,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return districtList;
+    }
+
+    public int wardCode(String wardName){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selection = "ward_name=?";
+        Cursor wardCursor = db.query("wards", new String[]{"ward_code"}, selection, new  String[] {wardName}, null,null, null);
+        wardCursor.moveToFirst();
+        int ward_code = wardCursor.getInt(0);
+        return  ward_code;
+    }
+
+    public String generateStudentId(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor studentCursor = db.rawQuery("SELECT * FROM student", null);
+        int numberSuffix = studentCursor.getCount() + 10001;
+        String regno = "2020-04-" + Integer.toString(numberSuffix);
+        return  regno;
     }
 }

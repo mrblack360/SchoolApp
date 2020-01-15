@@ -27,7 +27,6 @@ public class Admin {
         this.birth_date=birth_date;
         this.email=email;
         this.location_id=location_id;
-
     }
 
 }

@@ -30,7 +30,7 @@ public class AddStudent extends Fragment{
     public View onCreateView(@Nullable LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState){
-        DatabaseHelper database = new DatabaseHelper(getContext());
+        final DatabaseHelper database = new DatabaseHelper(getContext());
 
         View root = inflater.inflate(R.layout.fragment_add_student, container, false);
 
@@ -43,7 +43,7 @@ public class AddStudent extends Fragment{
          EditText phone_number = root.findViewById(R.id.phone_number);
          final Spinner region = root.findViewById(R.id.region);
          final Spinner district = root.findViewById(R.id.district);
-         Spinner ward = root.findViewById(R.id.ward);
+         final Spinner ward = root.findViewById(R.id.ward);
          Button add_student = root.findViewById(R.id.add_student_button);
 
 
@@ -82,9 +82,30 @@ public class AddStudent extends Fragment{
         region.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                Toast.makeText(getContext(), region.getItemAtPosition(position).toString(), Toast.LENGTH_LONG).show();
-                district.setEnabled(true);
+                // Populate districts
+                List<String> districtsList = database.getDistricts(region.getItemAtPosition(position).toString());
+                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, districtsList);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                district.setAdapter(dataAdapter);
 
+                // Listen to district selection
+                district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                        // Populate districts
+                        List<String> wardList = database.getWards(district.getItemAtPosition(position).toString());
+                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, wardList);
+                        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        ward.setAdapter(dataAdapter);
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parentView) {
+                        // your code here
+                    }
+
+                });
 
             }
 
@@ -94,6 +115,7 @@ public class AddStudent extends Fragment{
             }
 
         });
+
         return root;
     }
 

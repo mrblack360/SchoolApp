@@ -120,32 +120,56 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
-//    public Cursor getRegions(){
-//        SQLiteDatabase regionDB = this.getWritableDatabase();
-//        String query = "SELECT * FROM regions";
-//        Cursor cursor = regionDB.rawQuery(query,null);
-//        regionDB.close();
-//        return cursor;
-//    }
-
     public List<String> getRegions(){
         List<String> regionsList = new ArrayList<>();
-
         String selectQuery = "SELECT  * FROM regions";
-
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-
         if (cursor.moveToFirst()) {
             do {
                 regionsList.add(cursor.getString(1));
             } while (cursor.moveToNext());
         }
-
         cursor.close();
         db.close();
-
         return regionsList;
     }
 
+    public List<String> getDistricts(String regionName){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selection = "region_name=?";
+        Cursor regionCode = db.query("regions", new String[]{"region_code",}, selection, new  String[] {regionName}, null,null, null);
+        regionCode.moveToFirst();
+        int region_code = regionCode.getInt(0);
+        List<String> districtList = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM districts WHERE region_code="+region_code;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                districtList.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return districtList;
+    }
+
+    public List<String> getWards(String districtName){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selection = "district_name=?";
+        Cursor regionCode = db.query("districts", new String[]{"district_code"}, selection, new  String[] {districtName}, null,null, null);
+        regionCode.moveToFirst();
+        int district_code = regionCode.getInt(0);
+        List<String> districtList = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM wards WHERE district_code="+district_code;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                districtList.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return districtList;
+    }
 }

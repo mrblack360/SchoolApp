@@ -1,8 +1,8 @@
 package com.example.schoolapp.ui.addStudent;
 
 import android.app.DatePickerDialog;
-import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.schoolapp.DatabaseHelper;
 import com.example.schoolapp.R;
+import com.example.schoolapp.User;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,24 +28,28 @@ import java.util.List;
 import java.util.Locale;
 
 public class AddStudent extends Fragment{
+    public String selected_gender = "";
+    public int location_id = 0;
     public View onCreateView(@Nullable LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState){
         final DatabaseHelper database = new DatabaseHelper(getContext());
 
-        View root = inflater.inflate(R.layout.fragment_add_student, container, false);
+        final View root = inflater.inflate(R.layout.fragment_add_student, container, false);
 
-         EditText first_name = root.findViewById(R.id.student_first_name);
-         EditText middle_name = root.findViewById(R.id.student_middle_name);
-         EditText last_name = root.findViewById(R.id.student_last_name);
+         final EditText first_name = root.findViewById(R.id.student_first_name);
+         final EditText middle_name = root.findViewById(R.id.student_middle_name);
+         final EditText last_name = root.findViewById(R.id.student_last_name);
          RadioGroup gender = root.findViewById(R.id.gender_selection);
          final EditText date_of_birth = root.findViewById(R.id.birth_date);
-         EditText email = root.findViewById(R.id.email);
-         EditText phone_number = root.findViewById(R.id.phone_number);
+         final EditText email = root.findViewById(R.id.email);
+         final EditText phone_number = root.findViewById(R.id.phone_number);
          final Spinner region = root.findViewById(R.id.region);
          final Spinner district = root.findViewById(R.id.district);
          final Spinner ward = root.findViewById(R.id.ward);
          Button add_student = root.findViewById(R.id.add_student_button);
+
+
 
 
          // Calendar Dialog
@@ -92,17 +97,28 @@ public class AddStudent extends Fragment{
                 district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                        // Populate districts
+                        // Populate Wards
                         List<String> wardList = database.getWards(district.getItemAtPosition(position).toString());
                         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, wardList);
                         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         ward.setAdapter(dataAdapter);
 
+                        ward.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {                                
+                                location_id = database.wardCode(ward.getItemAtPosition(position).toString());
+                            }
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parentView) {
+                                // Nitakushughulikia nikipata muda
+                            }
+                        });
+
                     }
 
                     @Override
                     public void onNothingSelected(AdapterView<?> parentView) {
-                        // your code here
+                        // Nitakushughulikia nikipata muda
                     }
 
                 });
@@ -111,9 +127,53 @@ public class AddStudent extends Fragment{
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
+                // Nitakushughulikia nikipata muda
             }
 
+        });
+        // Listen gender selection
+        gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case 2131296379:
+                        selected_gender = "MALE";
+                        break;
+                    case 2131296378:
+                        selected_gender = "FEMALE";
+                        break;
+                }
+            }
+        });
+        add_student.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(first_name.getText().toString().length()<1 ||
+                        middle_name.getText().toString().length()<1 ||
+                        last_name.getText().toString().length()<1 ||
+                        email.getText().toString().length()<1 ||
+                        selected_gender.length()<1 ||
+                        phone_number.getText().toString().length()<5 ||
+                        location_id ==0
+                ){
+                    Toast.makeText(getContext(), "All fields are MANDATORY!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    String student_id = database.generateStudentId();
+                    User user = new User(student_id, last_name.getText().toString().toUpperCase(), "student");
+                    Student student = new Student(student_id,
+                            first_name.getText().toString(),
+                            middle_name.getText().toString(),
+                            last_name.getText().toString(),
+                            selected_gender,
+                            date_of_birth.getText().toString(),
+                            email.getText().toString(),
+                            Long.parseLong(phone_number.getText().toString().trim()),
+                            location_id);
+                    database.addUser(user);
+                    database.addStudent(student);
+                    Toast.makeText(getContext(), "STUDENT ADDED SUCCESSFULLY", Toast.LENGTH_LONG).show();
+                }
+            }
         });
 
         return root;

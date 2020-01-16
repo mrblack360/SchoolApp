@@ -189,4 +189,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String regno = "2020-04-" + Integer.toString(numberSuffix);
         return  regno;
     }
+
+    public List<String> StudentList() {
+        List<String> studentList = new ArrayList<>();
+//            SQLiteDatabase db = this.getReadableDatabase();
+//            Cursor c = db.rawQuery("SELECT * FROM student" , null);
+//
+//            if (c != null ) {
+//                if  (c.moveToFirst()) {
+//                    do {
+//                        String student_id = c.getString(c.getColumnIndex("FirstName"));
+//                        String first_name = c.getString(c.getColumnIndex("FirstName"));
+//                        String middle_name = c.getString(c.getColumnIndex("FirstName"));
+//                        String last_name = c.getString(c.getColumnIndex("FirstName"));
+//                        studentList.add(student_id + "\t|\t " + first_name + "\t|\t " + middle_name + "\t|\t " + last_name);
+//                    }while (c.moveToNext());
+//                }
+//            }
+
+        return studentList;
+    }
 }

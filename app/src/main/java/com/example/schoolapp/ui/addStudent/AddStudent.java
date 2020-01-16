@@ -2,7 +2,6 @@ package com.example.schoolapp.ui.addStudent;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -171,7 +170,7 @@ public class AddStudent extends Fragment{
                             location_id);
                     database.addUser(user);
                     database.addStudent(student);
-                    Toast.makeText(getContext(), "STUDENT ADDED SUCCESSFULLY", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "STUDENT ADDED SUCCESSFULLY\n with registration Number: "+student_id, Toast.LENGTH_LONG).show();
                 }
             }
         });

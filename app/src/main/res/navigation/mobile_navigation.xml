@@ -22,6 +22,11 @@
         android:name="com.example.schoolapp.ui.addStudent.AddStudent"
         android:label="@string/add_student"
         tools:layout="@layout/fragment_add_student" />
+    <fragment
+        android:id="@+id/nav_view_student"
+        android:name="com.example.schoolapp.ui.ViewStudent.view_student"
+        android:label="@string/view_student"
+        tools:layout="@layout/fragment_view_student" />
 
     <fragment
         android:id="@+id/nav_add_staff"

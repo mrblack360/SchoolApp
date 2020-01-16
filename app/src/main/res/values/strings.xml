@@ -20,9 +20,13 @@
     <string name="menu_home">Home</string>
     <string name="menu_tools">App Settings</string>
     <string name="add_student">Add Student</string>
+    <string name="view_student">View Student</string>
     <string name="edit_student">Edit Student</string>
     <string name="staff">Staff</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="courses">Courses</string>
+    <string name="add_course">Add Course</string>
+    <string name="edit_course">Edit Course</string>
+    <string name="view_course">View Course</string>
 
     <string name="admin_welcome_note">What Can You Do?</string>
     <string name="admin_doos">"
@@ -30,8 +34,11 @@
         2. Register Staff\n
         3. Register other administrators\n
         4. Register Courses\n
-        5. Editing the added items</string>
+        5. Editing the added items\n
+        6. View the registered items
+    </string>
 
+    <string name="student_id">"Student ID"</string>
     <string name="first_name">"First Name"</string>
     <string name="middle_name">"Middle Name"</string>
     <string name="last_name">"Last Name"</string>
@@ -49,9 +56,6 @@
     <string name="place_of_residence">"Place of Residence"</string>
     <string-array name="region">
         <item>Select Region</item>
-        <item>Arusha</item>
-        <item>Dar es Salaam</item>
-        <item>Dodoma</item>
     </string-array>
     <string-array name="district">
         <item>Select District</item>

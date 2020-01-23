@@ -9,7 +9,10 @@ import android.util.Log;
 
 import com.example.schoolapp.ui.addStudent.Student;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -160,17 +163,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor regionCode = db.query("districts", new String[]{"district_code"}, selection, new  String[] {districtName}, null,null, null);
         regionCode.moveToFirst();
         int district_code = regionCode.getInt(0);
-        List<String> districtList = new ArrayList<>();
+        List<String> wardsList = new ArrayList<>();
         String selectQuery = "SELECT  * FROM wards WHERE district_code="+district_code;
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
-                districtList.add(cursor.getString(0));
+                wardsList.add(cursor.getString(0));
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
-        return districtList;
+        return wardsList;
     }
 
     public int wardCode(String wardName){
@@ -186,27 +189,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor studentCursor = db.rawQuery("SELECT * FROM student", null);
         int numberSuffix = studentCursor.getCount() + 10001;
-        String regno = "2020-04-" + Integer.toString(numberSuffix);
+        DateFormat year = new SimpleDateFormat("yyyy");
+        Date date = new Date ();
+        String regno = year.format (date)+"-04-" + numberSuffix;
         return  regno;
     }
 
-    public List<String> StudentList() {
-        List<String> studentList = new ArrayList<>();
-//            SQLiteDatabase db = this.getReadableDatabase();
-//            Cursor c = db.rawQuery("SELECT * FROM student" , null);
-//
-//            if (c != null ) {
-//                if  (c.moveToFirst()) {
-//                    do {
-//                        String student_id = c.getString(c.getColumnIndex("FirstName"));
-//                        String first_name = c.getString(c.getColumnIndex("FirstName"));
-//                        String middle_name = c.getString(c.getColumnIndex("FirstName"));
-//                        String last_name = c.getString(c.getColumnIndex("FirstName"));
-//                        studentList.add(student_id + "\t|\t " + first_name + "\t|\t " + middle_name + "\t|\t " + last_name);
-//                    }while (c.moveToNext());
-//                }
-//            }
-
-        return studentList;
+    public Cursor getStudentCursor() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] selection =new String[] {"student_id", "first_name", "middle_name", "last_name"};
+        Cursor c = db.rawQuery("SELECT student_id as _id, first_name, middle_name, last_name FROM" +
+                " student" , null);
+        return c;
     }
 }

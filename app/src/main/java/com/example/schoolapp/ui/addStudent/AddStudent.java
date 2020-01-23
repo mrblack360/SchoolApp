@@ -1,6 +1,7 @@
 package com.example.schoolapp.ui.addStudent;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -133,12 +134,15 @@ public class AddStudent extends Fragment{
         // Listen gender selection
         gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Toast.makeText (getContext (), Integer.toString (checkedId), Toast.LENGTH_LONG).show ();
                 switch (checkedId){
-                    case 2131296379:
+                    case 2131296381:
                         selected_gender = "MALE";
+                        Toast.makeText (getContext (), selected_gender, Toast.LENGTH_LONG).show ();
                         break;
-                    case 2131296378:
+                    case 2131296380:
                         selected_gender = "FEMALE";
+                        Toast.makeText (getContext (), selected_gender, Toast.LENGTH_LONG).show ();
                         break;
                 }
             }
@@ -151,7 +155,7 @@ public class AddStudent extends Fragment{
                         last_name.getText().toString().length()<1 ||
                         email.getText().toString().length()<1 ||
                         selected_gender.length()<1 ||
-                        phone_number.getText().toString().length()<5 ||
+                        phone_number.getText().toString().length()<5||
                         location_id ==0
                 ){
                     Toast.makeText(getContext(), "All fields are MANDATORY!", Toast.LENGTH_LONG).show();
@@ -171,11 +175,21 @@ public class AddStudent extends Fragment{
                     database.addUser(user);
                     database.addStudent(student);
                     Toast.makeText(getContext(), "STUDENT ADDED SUCCESSFULLY\n with registration Number: "+student_id, Toast.LENGTH_LONG).show();
+                    first_name.setText (setEmpty ());
+                    middle_name.setText (setEmpty ());
+                    last_name.setText (setEmpty ());
+                    date_of_birth.setText (setEmpty ());
+                    email.setText (setEmpty ());
+                    phone_number.setText (setEmpty ());
                 }
             }
         });
 
         return root;
+    }
+
+    public String setEmpty(){
+        return "";
     }
 
 }

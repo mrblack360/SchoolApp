@@ -195,11 +195,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return  regno;
     }
 
-    public Cursor getStudentCursor() {
+    public Cursor getStudentsCursor() {
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] selection =new String[] {"student_id", "first_name", "middle_name", "last_name"};
         Cursor c = db.rawQuery("SELECT student_id as _id, first_name, middle_name, last_name FROM" +
                 " student" , null);
         return c;
+    }
+
+    public Cursor getStudentDetailsCursor(int recordId){
+        SQLiteDatabase db = this.getReadableDatabase ();
+        Cursor cursor= db.rawQuery ("SELECT * FROM student LIMIT 1 OFFSET "+recordId, null);
+        return cursor;
+    }
+    public String getLocation(int location_id){
+        SQLiteDatabase db = this.getReadableDatabase ();
+        String location = "";
+        Cursor cursor = db.rawQuery ("SELECT ward_name, district_name, region_name FROM wards, " +
+                "districts, regions WHERE wards.district_code=districts.district_code AND " +
+                "districts.region_code=regions.region_code AND ward_code="+location_id, null);
+        cursor.moveToFirst ();
+            location = cursor.getString (0) +", "+cursor.getString (1)+", "+cursor.getString (2);
+        return  location;
     }
 }

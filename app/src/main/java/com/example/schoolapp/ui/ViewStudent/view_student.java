@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -18,8 +17,9 @@ import android.widget.SimpleCursorAdapter;
 import com.example.schoolapp.DatabaseHelper;
 import com.example.schoolapp.R;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class view_student extends Fragment {
@@ -32,7 +32,7 @@ public class view_student extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_view_student, container, false);
         listView = root.findViewById(R.id.list_view);
-        Cursor studentCursor = database.getStudentCursor();
+        Cursor studentCursor = database.getStudentsCursor();
 
 
         CursorAdapter studentAdapter;
@@ -52,14 +52,40 @@ public class view_student extends Fragment {
                 AlertDialog.Builder dialogbox = new AlertDialog.Builder (getContext ());
                 dialogbox.setIcon (R.drawable.ic_person_add_24px);
                 dialogbox.setPositiveButton ("BACK", null);
-                String studentDeatails = "Realaaaax";
-                dialogbox.setTitle ("View Student");
+                Cursor studentDetailsCursor = database.getStudentDetailsCursor(position);
+                String studentDeatails="";
+                studentDetailsCursor.moveToFirst ();
+                    String student_id = studentDetailsCursor.getString (0);
+                    String firstName = studentDetailsCursor.getString (1);
+                    String middleName = studentDetailsCursor.getString (2);
+                    String lastName = studentDetailsCursor.getString (3);
+                    String gender = studentDetailsCursor.getString (4);
+                    String age = age(studentDetailsCursor.getString (5));
+                    String email = studentDetailsCursor.getString (6);
+                    String phone_number = studentDetailsCursor.getString (7);
+                    String location =
+                            database.getLocation(Integer.parseInt (studentDetailsCursor.getString (8)));
+                    studentDeatails = "Name\t:\t"+lastName+", "+firstName+" "+middleName+"\n"+
+                            "Gender\t:\t"+gender+"\n"+
+                            "Age\t:\t"+age+"\n"+
+                            "Email\t:\t"+email+"\n"+
+                            "Phone\t:\t"+phone_number+"\n"+
+                            "Home\t:\t"+location;
+                dialogbox.setTitle (student_id);
                 dialogbox.setMessage (studentDeatails);
                 dialogbox.show ();
             }
         });
 
         return root;
+    }
+
+    public String age(String dateOfBirth){
+        DateFormat year = new SimpleDateFormat ("yyyy");
+        Date date = new Date ();
+        int birthYear = Integer.parseInt (dateOfBirth.substring (6));
+        int currentYear = Integer.parseInt (year.format (date));
+        return (currentYear-birthYear) + " years";
     }
 
 }

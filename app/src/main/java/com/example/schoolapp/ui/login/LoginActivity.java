@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.schoolapp.AdminHomeActivity;
 import com.example.schoolapp.DatabaseHelper;
 import com.example.schoolapp.R;
+import com.example.schoolapp.User;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -38,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -58,6 +60,11 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {
+                DatabaseHelper data = new DatabaseHelper(getApplicationContext());
+                User defaultUser = new User("AD0001", "admin1", "admin");
+                if(!data.userExist(defaultUser)){
+                data.addUser(defaultUser);
+                }
                 if (loginResult == null) {
                     return;
                 }
@@ -65,14 +72,14 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getError()!=null) {
                     showLoginFailed();
                 }
-                if (loginResult.getSuccess("AD000", "admiN0")!=null) {
+                if(isValidUser(usernameEditText.getText().toString(), passwordEditText.getText().toString())){
                     updateUiWithUser();
                     goHome();
-                    Toast.makeText(getApplicationContext(), "Admin "+usernameEditText.getText().toString(), Toast.LENGTH_LONG).show();
-                }
+                    Toast.makeText(getApplicationContext(), "Logged in as  "+usernameEditText.getText().toString(), Toast.LENGTH_LONG).show();
+                    finish();
+                }else Toast.makeText(getApplicationContext(), "Log in failed due to INCORRECT CREDENTIALS", Toast.LENGTH_LONG).show();
                 setResult(Activity.RESULT_OK);
 
-                finish();
             }
         });
 
@@ -119,7 +126,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUiWithUser() {
         String welcome = getString(R.string.welcome);
-        // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
@@ -127,15 +133,16 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Something isn't right", Toast.LENGTH_SHORT).show();
     }
 
-    public void goHome(){
-        Intent i = new Intent(this, AdminHomeActivity.class);
-        startActivity(i);
-    }
-    public boolean allowLogin(String username, String  password){
-        DatabaseHelper databaseHelper = new DatabaseHelper(this);
-        if (databaseHelper.authenticateAdmin(username, password)){
+    public boolean isValidUser(String username, String password){
+        DatabaseHelper studentDatabase = new DatabaseHelper(this);
+        if (studentDatabase.authenticateUser(username, password)) {
             return true;
         }
         return false;
+    }
+
+    public void goHome(){
+        Intent i = new Intent(this, AdminHomeActivity.class);
+        startActivity(i);
     }
 }

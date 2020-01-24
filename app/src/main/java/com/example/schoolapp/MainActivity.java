@@ -10,6 +10,7 @@ import com.example.schoolapp.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
     DatabaseHelper myDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

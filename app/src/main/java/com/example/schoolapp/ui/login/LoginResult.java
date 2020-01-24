@@ -21,9 +21,11 @@ class LoginResult {
 
     @Nullable
     LoggedInUserView getSuccess(String username, String password) {
-        if (username == "AD000" && password == "admiN0") {
-            return success;
-        }
+        // TODO Hakikisha unapata user role na context
+//        DatabaseHelper studentDatabase = new DatabaseHelper(this);
+//        if (studentDatabase.authenticateUser(username, password)) {
+//            return success;
+//        }
         return null;
     }
 
@@ -31,4 +33,5 @@ class LoginResult {
     Integer getError() {
         return error;
     }
+
 }

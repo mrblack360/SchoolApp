@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.schoolapp.ui.addStaff.Staff;
 import com.example.schoolapp.ui.addStudent.Student;
 
 import java.text.DateFormat;
@@ -20,6 +21,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     String createAdminTable = "create TABLE admin(admin_id TEXT PRIMARY KEY, first_name TEXT, middle_name VARCHAR(15), last_name VARCHAR(15), gender VARCHAR(6), birth_date VARCHAR(13), email VARCHAR(30), location_id int(8))";
     String createUserTable = "CREATE TABLE user(user_name VARCHAR(10) PRIMARY KEY, password VARCHAR(10), user_role VARCHAR(10))";
     String createStudentTable = "CREATE TABLE student(student_id text(6) PRIMARY KEY, first_name TEXT, middle_name text(15), last_name text(15), gender VARCHAR(6), date_of_birth VARCHAR(13), email VARCHAR(30), phone_number int(10), location_id int(8))";
+    String createStaffTable = "CREATE TABLE staff(staff_id text(6) PRIMARY KEY, first_name " +
+            "TEXT, middle_name text(15), last_name text(15), gender VARCHAR(6), date_of_birth VARCHAR(13), email VARCHAR(30), phone_number int(10), location_id int(8))";
 
     public DatabaseHelper (Context context){
         super(context, "School.db", null, 1);
@@ -29,6 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createAdminTable);
         db.execSQL(createUserTable);
         db.execSQL(createStudentTable);
+        db.execSQL(createStaffTable);
         db.execSQL(location.createRegionTable);
         db.execSQL(location.createDistrictTable);
         db.execSQL(location.createWardTable);
@@ -42,6 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS admin");
         db.execSQL("DROP TABLE IF EXISTS user");
         db.execSQL("DROP TABLE IF EXISTS student");
+        db.execSQL("DROP TABLE IF EXISTS staff");
         db.execSQL("DROP TABLE IF EXISTS districts");
         db.execSQL("DROP TABLE IF EXISTS regions");
         db.execSQL("DROP TABLE IF EXISTS wards");
@@ -66,7 +71,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("birth_date", admin.birth_date);
         values.put("location_id", admin.location_id);
         SQLiteDatabase db = getWritableDatabase();
-        db.insert("staff", null, values);
+        db.insert("admin", null, values);
         db.close();
     }
 
@@ -83,6 +88,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("location_id", student.location_id);
         SQLiteDatabase studentDB = getWritableDatabase();
         studentDB.insert("student", null, values);
+        studentDB.close();
+    }
+    public void addStaff(Staff staff){
+        ContentValues values = new ContentValues();
+        values.put("staff_id", staff.staff_id);
+        values.put("first_name", staff.first_name);
+        values.put("middle_name", staff.middle_name);
+        values.put("last_name", staff.last_name);
+        values.put("gender", staff.gender);
+        values.put("date_of_birth", staff.date_of_birth);
+        values.put("email", staff.email);
+        values.put("phone_number", staff.phone_number);
+        values.put("location_id", staff.location_id);
+        SQLiteDatabase studentDB = getWritableDatabase();
+        studentDB.insert("staff", null, values);
         studentDB.close();
     }
 
@@ -193,6 +213,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Date date = new Date ();
         String regno = year.format (date)+"-04-" + numberSuffix;
         return  regno;
+    }
+
+    public String generateStaffId(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor staffCursor = db.rawQuery("SELECT * FROM staff", null);
+        int numberSuffix = staffCursor.getCount() + 10001;
+        DateFormat year = new SimpleDateFormat("yyyy");
+        Date date = new Date ();
+        String staff_id = year.format (date)+"-04-" + numberSuffix;
+        return  staff_id;
     }
 
     public Cursor getStudentsCursor() {

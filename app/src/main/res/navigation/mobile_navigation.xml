@@ -33,4 +33,9 @@
         android:name="com.example.schoolapp.ui.addStaff.addStaff"
         android:label="@string/add_staff"
         tools:layout="@layout/fragment_add_student" />
+    <fragment
+        android:id="@+id/nav_view_staff"
+        android:name="com.example.schoolapp.ui.ViewStaff.ViewStaff"
+        android:label="@string/view_staff"
+        tools:layout="@layout/fragment_view_staff" />
 </navigation>

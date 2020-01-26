@@ -43,7 +43,7 @@
             <item
                 android:id="@+id/nav_view_staff"
                 android:icon="@drawable/ic_personlist"
-                android:title="@string/edit_staff" />
+                android:title="@string/view_staff" />
         </menu>
     </item>
 
@@ -61,7 +61,7 @@
             <item
                 android:id="@+id/nav_view_course"
                 android:icon="@drawable/ic_list"
-                android:title="@string/edit_course"
+                android:title="@string/view_course"
                 />
         </menu>
     </item>

@@ -11,13 +11,13 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginRight="5dp"
-        app:srcCompat="@mipmap/ic_student_round"
+        app:srcCompat="@mipmap/ic_staff_round"
         android:contentDescription="@string/first_name"/>
     <TextView
-        android:id="@+id/student_id"
+        android:id="@+id/staff_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/student_id"
+        android:text="@string/staff_id"
         android:layout_toRightOf="@id/icon"
         android:textSize="18sp"
         android:textColor="@color/colorPrimary"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:text=","
         android:textSize="18sp"
-        android:layout_below="@id/student_id"
+        android:layout_below="@id/staff_id"
         android:layout_toRightOf="@id/last_name"
         />
 
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:text="@string/first_name"
         android:textSize="18sp"
-        android:layout_below="@id/student_id"
+        android:layout_below="@id/staff_id"
         android:layout_toRightOf="@id/comma"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:text="@string/middle_name"
         android:textSize="18sp"
-        android:layout_below="@id/student_id"
+        android:layout_below="@id/staff_id"
         android:layout_toRightOf="@id/first_name"/>
 
     <TextView
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:text="@string/last_name"
         android:textSize="18sp"
-        android:layout_below="@id/student_id"
+        android:layout_below="@id/staff_id"
         android:layout_toRightOf="@id/icon"/>
 
 </RelativeLayout>

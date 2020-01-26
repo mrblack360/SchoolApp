@@ -109,7 +109,7 @@ public class AddStudent extends Fragment{
                             }
                             @Override
                             public void onNothingSelected(AdapterView<?> parentView) {
-                                // Nitakushughulikia nikipata muda
+                                // TODO Nitakushughulikia baadae
                             }
                         });
 
@@ -117,7 +117,7 @@ public class AddStudent extends Fragment{
 
                     @Override
                     public void onNothingSelected(AdapterView<?> parentView) {
-                        // Nitakushughulikia nikipata muda
+                        // TODO Nitakushughulikia baadae
                     }
 
                 });
@@ -126,22 +126,19 @@ public class AddStudent extends Fragment{
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // Nitakushughulikia nikipata muda
+                // TODO Nitakushughulikia baadae
             }
 
         });
         // Listen gender selection
         gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Toast.makeText (getContext (), Integer.toString (checkedId), Toast.LENGTH_LONG).show ();
                 switch (checkedId){
-                    case 2131296381:
+                    case R.id.gender_male:
                         selected_gender = "MALE";
-                        Toast.makeText (getContext (), selected_gender, Toast.LENGTH_LONG).show ();
                         break;
-                    case 2131296380:
+                    case R.id.gender_female:
                         selected_gender = "FEMALE";
-                        Toast.makeText (getContext (), selected_gender, Toast.LENGTH_LONG).show ();
                         break;
                 }
             }

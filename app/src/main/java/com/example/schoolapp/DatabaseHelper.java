@@ -219,9 +219,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor staffCursor = db.rawQuery("SELECT * FROM staff", null);
         int numberSuffix = staffCursor.getCount() + 10001;
-        DateFormat year = new SimpleDateFormat("yyyy");
-        Date date = new Date ();
-        String staff_id = year.format (date)+"-04-" + numberSuffix;
+        String staff_id = "ST-" + numberSuffix;
         return  staff_id;
     }
 
@@ -230,6 +228,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor c = db.rawQuery("SELECT student_id as _id, first_name, middle_name, last_name FROM" +
                 " student" , null);
         return c;
+    }
+    public Cursor getStaffsCursor() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT staff_id as _id, first_name, middle_name, last_name FROM" +
+                " staff" , null);
+        return cursor;
     }
 
     public Cursor getStudentDetailsCursor(int recordId){

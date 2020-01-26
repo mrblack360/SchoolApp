@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    >
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="5dp"
+        app:srcCompat="@mipmap/ic_student_round"
+        android:contentDescription="@string/first_name"/>
+    <TextView
+        android:id="@+id/student_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/student_id"
+        android:layout_toRightOf="@id/icon"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimary"
+        />
+    <TextView
+        android:id="@+id/comma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=","
+        android:textSize="18sp"
+        android:layout_below="@id/student_id"
+        android:layout_toRightOf="@id/last_name"
+        />
+
+    <TextView
+        android:id="@+id/first_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/first_name"
+        android:textSize="18sp"
+        android:layout_below="@id/student_id"
+        android:layout_toRightOf="@id/comma"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        />
+
+    <TextView
+        android:id="@+id/middle_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/middle_name"
+        android:textSize="18sp"
+        android:layout_below="@id/student_id"
+        android:layout_toRightOf="@id/first_name"/>
+
+    <TextView
+        android:id="@+id/last_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/last_name"
+        android:textSize="18sp"
+        android:layout_below="@id/student_id"
+        android:layout_toRightOf="@id/icon"/>
+
+</RelativeLayout>

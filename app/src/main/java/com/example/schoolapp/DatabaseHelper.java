@@ -241,6 +241,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor= db.rawQuery ("SELECT * FROM student LIMIT 1 OFFSET "+recordId, null);
         return cursor;
     }
+
+    public Cursor getStaffDetailsCursor(int recordId){
+        SQLiteDatabase db = this.getReadableDatabase ();
+        Cursor cursor= db.rawQuery ("SELECT * FROM staff LIMIT 1 OFFSET "+recordId, null);
+        return cursor;
+    }
     public String getLocation(int location_id){
         SQLiteDatabase db = this.getReadableDatabase ();
         String location = "";

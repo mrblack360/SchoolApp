@@ -257,4 +257,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             location = cursor.getString (0) +", "+cursor.getString (1)+", "+cursor.getString (2);
         return  location;
     }
+
 }

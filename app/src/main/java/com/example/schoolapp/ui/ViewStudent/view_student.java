@@ -53,7 +53,7 @@ public class view_student extends Fragment {
                 dialogbox.setIcon (R.drawable.ic_person_add_24px);
                 dialogbox.setPositiveButton ("BACK", null);
                 Cursor studentDetailsCursor = database.getStudentDetailsCursor(position);
-                String studentDeatails="";
+                String studentDetails="";
                 studentDetailsCursor.moveToFirst ();
                     String student_id = studentDetailsCursor.getString (0);
                     String firstName = studentDetailsCursor.getString (1);
@@ -65,14 +65,14 @@ public class view_student extends Fragment {
                     String phone_number = studentDetailsCursor.getString (7);
                     String location =
                             database.getLocation(Integer.parseInt (studentDetailsCursor.getString (8)));
-                    studentDeatails = "Name\t:\t"+lastName+", "+firstName+" "+middleName+"\n"+
+                    studentDetails = "Name\t:\t"+lastName+", "+firstName+" "+middleName+"\n"+
                             "Gender\t:\t"+gender+"\n"+
                             "Age\t:\t"+age+"\n"+
                             "Email\t:\t"+email+"\n"+
                             "Phone\t:\t"+phone_number+"\n"+
                             "Home\t:\t"+location;
                 dialogbox.setTitle (student_id);
-                dialogbox.setMessage (studentDeatails);
+                dialogbox.setMessage (studentDetails);
                 dialogbox.show ();
             }
         });
